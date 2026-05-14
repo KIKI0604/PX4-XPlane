@@ -1,6 +1,6 @@
 # PX4 - X-Plane 설치 매뉴얼
 
-이 매뉴얼은 Windows + WSL2 Ubuntu + PX4 + X-Plane 12 + px4xplane 플러그인을 연동하기 위한 설치 과정을 간단히 정리한 문서입니다.
+이 매뉴얼은 Windows + WSL2 Ubuntu + PX4 + X-Plane 12 + px4xplane 플러그인 설치 및 연동을 위함. 
 
 ---
 
@@ -46,9 +46,10 @@ cd ~
 홈 디렉토리로 이동합니다.
 
 ```bash
-git clone --recursive --branch v1.15.0 https://github.com/PX4/PX4-Autopilot.git
+git clone --recursive --branch v0.00.0 https://github.com/PX4/PX4-Autopilot.git
 ```
-PX4 v1.15.0 고정 버전을 클론합니다.
+PX4 v0.00.0 고정 버전을 클론합니다.
+비교용 PX4-Autopilot 폴더 생성으로 X-Plane은 해당 펌웨어 빌드가 아니니 큰 상관은 없습니다.
 
 ```bash
 cd ~/PX4-Autopilot
@@ -68,7 +69,7 @@ git describe --tags
 정상 예시:
 
 ```text
-v1.15.0
+v1.14.0
 ```
 
 ```bash
