@@ -6,92 +6,93 @@
 
 ## 1. WSL 설치 및 설정
 
+WSL2 Ubuntu 22.04를 설치합니다.
 ```powershell
 wsl --install -d Ubuntu-22.04
 ```
-WSL2 Ubuntu 22.04를 설치합니다.
 
+설치된 WSL 배포판과 WSL 버전을 확인합니다.
 ```powershell
 wsl -l -v
 ```
-설치된 WSL 배포판과 WSL 버전을 확인합니다.
 
+Ubuntu 22.04에 접속합니다.
 ```powershell
 wsl -d Ubuntu-22.04
 ```
-Ubuntu 22.04에 접속합니다.
 
+Ubuntu 패키지 목록을 갱신합니다.
 ```bash
 sudo apt update
 ```
-Ubuntu 패키지 목록을 갱신합니다.
 
+기존 패키지를 업데이트합니다.
 ```bash
 sudo apt upgrade -y
 ```
-기존 패키지를 업데이트합니다.
 
+PX4 기본 작업에 필요한 도구를 설치합니다.
 ```bash
 sudo apt install git curl wget unzip python3 python3-pip -y
 ```
-PX4 기본 작업에 필요한 도구를 설치합니다.
 
 ---
 
 ## 2. PX4 기본 설치
 
+홈 디렉토리로 이동합니다.
 ```bash
 cd ~
 ```
-홈 디렉토리로 이동합니다.
 
+PX4 v0.00.0 고정 버전을 클론합니다.
+비교용 PX4-Autopilot 폴더 생성으로 X-Plane은 해당 펌웨어 빌드가 아니니 큰 상관은 없습니다.
 ```bash
 git clone --recursive --branch v0.00.0 https://github.com/PX4/PX4-Autopilot.git
 ```
-PX4 v0.00.0 고정 버전을 클론합니다.
-비교용 PX4-Autopilot 폴더 생성으로 X-Plane은 해당 펌웨어 빌드가 아니니 큰 상관은 없습니다.
 
+PX4 폴더로 이동합니다.
 ```bash
 cd ~/PX4-Autopilot
 ```
-PX4 폴더로 이동합니다.
 
+PX4 서브모듈을 동기화합니다.
 ```bash
 git submodule update --init --recursive
 ```
-PX4 서브모듈을 동기화합니다.
 
+현재 PX4 버전을 확인합니다.
 ```bash
 git describe --tags
 ```
-현재 PX4 버전을 확인합니다.
 
 정상 예시:
-
 ```text
 v1.14.0
 ```
 
+PX4 Ubuntu 개발환경을 설치합니다.
 ```bash
 bash ./Tools/setup/ubuntu.sh
 ```
-PX4 Ubuntu 개발환경을 설치합니다.
 
+설치 후 WSL을 완전히 재시작합니다.
+
+해당 명령어는 별도의 Powershell을 열어 Ubuntu가 실행된 터미널이 종료됨을 확인합니다.
 ```powershell
 wsl --shutdown
 ```
-설치 후 WSL을 완전히 재시작합니다.
 
+Ubuntu에 다시 접속합니다.
 ```powershell
 wsl -d Ubuntu-22.04
 ```
-Ubuntu에 다시 접속합니다.
 
+PX4 SITL 기본 빌드 및 실행을 확인합니다.
 ```bash
 cd ~/PX4-Autopilot
 make px4_sitl none
 ```
-PX4 SITL 기본 빌드 및 실행을 확인합니다.
 
 정상 예시:
 
@@ -134,10 +135,10 @@ X-Plane 12
 
 ### X-Plane 설치 경로 확인
 
+X-Plane 12 설치 폴더가 존재하는지 확인합니다.
 ```powershell
 Test-Path "C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12"
 ```
-X-Plane 12 설치 폴더가 존재하는지 확인합니다.
 
 정상 출력:
 
@@ -145,10 +146,11 @@ X-Plane 12 설치 폴더가 존재하는지 확인합니다.
 True
 ```
 
+X-Plane 플러그인 폴더가 존재하는지 확인합니다.
 ```powershell
 Test-Path "C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12\Resources\plugins"
 ```
-X-Plane 플러그인 폴더가 존재하는지 확인합니다.
+
 
 정상 출력:
 
@@ -218,10 +220,11 @@ px4xplane 실행 플러그인 파일이 있는지 확인합니다.
 True
 ```
 
+px4xplane 설정 파일이 있는지 확인합니다.
 ```powershell
 Test-Path "C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12\Resources\plugins\px4xplane\64\config.ini"
 ```
-px4xplane 설정 파일이 있는지 확인합니다.
+
 
 정상 출력:
 
@@ -231,10 +234,10 @@ True
 
 ### px4xplane 설정 확인
 
+debug 설정과 MAVLink 전송률 설정을 확인합니다.
 ```powershell
 Select-String -Path "C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12\Resources\plugins\px4xplane\64\config.ini" -Pattern "debug_|mavlink_sensor_rate_hz|mavlink_gps_rate_hz"
 ```
-debug 설정과 MAVLink 전송률 설정을 확인합니다.
 
 권장 설정:
 
@@ -296,22 +299,22 @@ ALIA-250.acf
 
 ## 4. X-Plane 연동용 PX4 설치
 
+X-Plane 연동용 PX4 fork를 클론합니다.
 ```bash
 cd ~
 git clone --recursive -b px4xplane-sitl https://github.com/alireza787b/PX4-Autopilot-Me.git PX4-Autopilot-Me
 ```
-X-Plane 연동용 PX4 fork를 클론합니다.
 
+X-Plane fork 폴더로 이동하고 서브모듈을 동기화합니다.
 ```bash
 cd ~/PX4-Autopilot-Me
 git submodule update --init --recursive
 ```
-X-Plane fork 폴더로 이동하고 서브모듈을 동기화합니다.
 
+현재 브랜치를 확인합니다.
 ```bash
 git branch --show-current
 ```
-현재 브랜치를 확인합니다.
 
 정상 출력:
 
@@ -319,10 +322,10 @@ git branch --show-current
 px4xplane-sitl
 ```
 
+작업 트리 상태를 확인합니다.
 ```bash
 git status
 ```
-작업 트리 상태를 확인합니다.
 
 정상 예시:
 
@@ -334,10 +337,10 @@ nothing to commit, working tree clean
 
 ## 5. Windows WSL IP 확인
 
+Windows PowerShell에서 WSL용 가상 네트워크 IP를 확인합니다.
 ```powershell
 ipconfig
 ```
-Windows PowerShell에서 WSL용 가상 네트워크 IP를 확인합니다.
 
 확인할 항목:
 
@@ -395,12 +398,12 @@ echo $PX4_SIM_HOSTNAME
 
 ### X-Plane ALIA-250 연동용 PX4 SITL 실행
 
+X-Plane ALIA-250 연동용 PX4 SITL을 실행합니다.
 ```bash
 cd ~/PX4-Autopilot-Me
 export PX4_SIM_HOSTNAME=172.17.160.1
 make px4_sitl_default xplane_alia250
 ```
-X-Plane ALIA-250 연동용 PX4 SITL을 실행합니다.
 
 정상 로그 예시:
 
