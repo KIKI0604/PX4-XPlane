@@ -209,10 +209,10 @@ C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12
 
 ### px4xplane 설치 확인
 
+px4xplane 실행 플러그인 파일이 있는지 확인합니다.
 ```powershell
 Test-Path "C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12\Resources\plugins\px4xplane\64\win.xpl"
 ```
-px4xplane 실행 플러그인 파일이 있는지 확인합니다.
 
 정상 출력:
 
